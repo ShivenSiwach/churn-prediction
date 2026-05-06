@@ -6,3 +6,6 @@ mlruns/
 models/
 *.pkl
 .env
+# Data files
+data/
+*.csv
