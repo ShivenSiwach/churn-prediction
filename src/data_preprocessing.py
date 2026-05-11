@@ -67,3 +67,12 @@ with open("models/scaler.pkl", "wb") as f:
 print(x_train[num_cols].describe().round(2))
 print("scaling done")
 print("Scaler save -> model/scaler.pkl")
+
+# Save train and test splits
+x_train["Churn"] = y_train
+x_test["Churn"] = y_test
+
+x_train.to_csv("data/train.csv", index=False)
+x_test.to_csv("data/test.csv", index=False)
+
+print("Train and test saved -> data/train.csv, data/test.csv")
