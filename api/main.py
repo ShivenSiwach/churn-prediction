@@ -48,12 +48,14 @@ class CustomerData(BaseModel):
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Churn Prediction API! Go to /docs to test the model."}
+# The actual prediction needs the POST decorator on the "/predict" path
+@app.post("/predict")
 def predict(data: CustomerData):
-   # convert to dataframe
-   df = pd.DataFrame([data.dict()]) 
+    # convert to dataframe
+    df = pd.DataFrame([data.dict()])
 
    # 1. FIX: Map Pydantic safe names back to XGBoost expected names
-   rename_map = {
+    rename_map = {
        "InternetService_Fiber_optic": "InternetService_Fiber optic",
        "Contract_One_year": "Contract_One year",
        "Contract_Two_year": "Contract_Two year",
@@ -61,31 +63,29 @@ def predict(data: CustomerData):
        "PaymentMethod_Electronic_check": "PaymentMethod_Electronic check",
        "PaymentMethod_Mailed_check": "PaymentMethod_Mailed check"
    }
-   df = df.rename(columns=rename_map)
+    df = df.rename(columns=rename_map)
 
    # 2. Force the correct column order
-   expected_cols = model.get_booster().feature_names
-   df = df[expected_cols]
+    expected_cols = model.get_booster().feature_names
+    df = df[expected_cols]
 
    # 3. scale numeric columns
-   num_cols = ["tenure", "MonthlyCharges", "TotalCharges", "avg_monthly_spend"]
-   df[num_cols] = scaler.transform(df[num_cols])
+    num_cols = ["tenure", "MonthlyCharges", "TotalCharges", "avg_monthly_spend"]
+    df[num_cols] = scaler.transform(df[num_cols])
 
   # 4. predict
-   prediction = model.predict(df)[0]
-   
-# Convert to float first, THEN round
-   probability = round(float(model.predict_proba(df)[0][1]), 4)
+    prediction = model.predict(df)[0]
+    probability = round(float(model.predict_proba(df)[0][1]), 4)
    
    # human readable message
-   if probability > 0.7:
+    if probability > 0.7:
       message = "high risk of churn"
-   elif probability > 0.4:
+    elif probability > 0.4:
       message = "medium risk of churn"
-   else:
+    else:
       message = "low risk of churn"
 
-   return {
+    return {
       "churn_prediction": int(prediction),
       "churn_probability": probability, # Now safely a native python float
       "message": message
