@@ -1,4 +1,4 @@
-# Churn Prediction — End-to-End ML Project
+Markdown# Churn Prediction — End-to-End ML Project
 
 A production-ready machine learning project that predicts customer churn using XGBoost, served via a FastAPI REST API, tracked with MLflow, and containerized with Docker.
 
@@ -13,15 +13,16 @@ A telecom company wants to identify customers likely to cancel their subscriptio
 ## Tech Stack
 | Tool | Purpose |
 | :--- | :--- |
-| **XGBoost** | Model training and inference |
-| **scikit-learn** | Data preprocessing and evaluation metrics |
+| **XGBoost** | Model training |
+| **scikit-learn** | Preprocessing + metrics |
 | **pandas / numpy** | Data manipulation |
-| **FastAPI & Pydantic** | REST API routing and strict payload validation |
-| **MLflow** | Experiment tracking and artifact registry |
-| **Docker** | Secure, non-root containerization |
+| **FastAPI** | REST API (with strict Pydantic validation) |
+| **MLflow** | Experiment tracking |
+| **Docker** | Containerization (secured with non-root user) |
 | **Python 3.11** | Core language |
 
 ## Project Structure
+```text
 churn-prediction/
 ├── data/               # Raw and processed data
 ├── src/                # Core scripts
@@ -34,60 +35,20 @@ churn-prediction/
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
-
-Model Performance
-
-Metric             Score
-AUC-ROC            0.8252
-F1 Score (churn)   0.58
-Precision          0.53
-Recall             0.64
-Accuracy           0.75
-#Note: The model handles class imbalance natively using scale_pos_weight = 3.54.
-
-ML Pipeline:>
-
-Phase 1: Data cleaning and Exploratory Data Analysis (EDA)
-
-Phase 2: Feature engineering and stratified train/test splitting
-
-Phase 3: XGBoost model training
-
-Phase 4: MLflow experiment tracking
-
-Phase 5: FastAPI deployment with Pydantic error handling
-
-Phase 6: Docker containerization with non-root security compliance
-
-How to Run
-
-Option 1 — Local Environment
-# Install dependencies
+Model PerformanceMetricScoreAUC-ROC0.8252F1 Score (churn)0.58Precision0.53Recall0.64Accuracy0.75Model handles class imbalance using scale_pos_weight=3.54ML PipelinePhase 1 — Data cleaning + EDAPhase 2 — Feature engineering + train/test splitPhase 3 — XGBoost model trainingPhase 4 — MLflow experiment trackingPhase 5 — FastAPI deployment (optimized for latency + Pydantic error handling)Phase 6 — Docker containerization (enterprise-ready non-root deployment)How to RunOption 1 — LocalBash# Install dependencies
 pip install -r requirements.txt
 
-# Run preprocessing and train model
+# Run preprocessing
 python src/data_preprocessing.py
+
+# Train model
 python src/train_model.py
 
 # Start API
 uvicorn api.main:app --reload
-
-Option 2 — Docker (Recommended)
-
-Bash
-# Build the image
-docker build -t churn-prediction .
-
-# Run the container securely
+Option 2 — DockerBashdocker build -t churn-prediction .
 docker run -p 8000:8000 churn-prediction
-
-API Usage
-Send a POST request to /predict. The API uses strict Pydantic data validation to reject improper data types and prevent backend crashes.
-
-Payload:
-
-JSON
-{
+API UsageSend a POST request to /predict:JSON{
   "tenure": 24,
   "MonthlyCharges": 65.50,
   "TotalCharges": 1572.00,
@@ -113,24 +74,9 @@ JSON
   "PaymentMethod_Mailed_check": 0,
   "gender_Male": 1
 }
-Response:
-
-JSON
-{
+ResponseJSON{
   "churn_prediction": 1,
   "churn_probability": 0.6058,
   "risk_category": "medium risk of churn"
 }
-
-Key Learnings
-.Production API Hardening: Implemented strict Pydantic Field validation to reject bad payloads and optimized the endpoint to compute predictions natively from probabilities, cutting inference latency.
-
-.Secure Deployment: Containerized the full pipeline with Docker, implementing a non-root user environment to align with enterprise security standards.
-
-.Efficient Imbalance Handling: Handled class imbalance with scale_pos_weight instead of oversampling, ensuring cleaner and more efficient training.
-
-.Leakage Prevention: Prevented data leakage by strictly fitting the scaler on the training set only.
-
-.Observability: Tracked all experiments and artifact registries automatically with MLflow.
-
-:-Author: Built as a production-focused end-to-end ML engineering portfolio project.
+Key LearningsHandled class imbalance with scale_pos_weight instead of oversampling — cleaner and more efficientUsed stratified train/test split to maintain churn ratioPrevented data leakage by fitting scaler on train onlyTracked all experiments automatically with MLflowContainerized the full pipeline with Docker for reproducible, secure enterprise deploymentsBuilt production-ready REST API with FastAPI + Pydantic validation to block bad payloadsAuthorBuilt as an end-to-end ML engineer portfolio project.
