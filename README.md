@@ -35,7 +35,26 @@ churn-prediction/
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
-Model PerformanceMetricScoreAUC-ROC0.8252F1 Score (churn)0.58Precision0.53Recall0.64Accuracy0.75Model handles class imbalance using scale_pos_weight=3.54ML PipelinePhase 1 — Data cleaning + EDAPhase 2 — Feature engineering + train/test splitPhase 3 — XGBoost model trainingPhase 4 — MLflow experiment trackingPhase 5 — FastAPI deployment (optimized for latency + Pydantic error handling)Phase 6 — Docker containerization (enterprise-ready non-root deployment)How to RunOption 1 — LocalBash# Install dependencies
+
+Model Performance
+Metric                         Score
+AUC-ROC                        0.8252
+F1 Score (churn)               0.58
+Precision                      0.53
+Recall                         0.64
+Accuracy                       0.75
+Model handles class imbalance using scale_pos_weight=3.54
+
+#ML Pipeline
+: Phase 1 — Data cleaning + EDA
+: Phase2 — Feature engineering + train/test split
+: Phase 3 — XGBoost model training
+: Phase 4 — MLflow experiment tracking
+: Phase 5 — FastAPI deployment (optimized for latency + Pydantic error handling)
+: Phase 6 — Docker containerization (enterprise-ready non-root deployment)
+
+#How to RunOption
+:Option 1 — LocalBash# Install dependencies
 pip install -r requirements.txt
 
 # Run preprocessing
@@ -46,9 +65,12 @@ python src/train_model.py
 
 # Start API
 uvicorn api.main:app --reload
-Option 2 — DockerBashdocker build -t churn-prediction .
+
+:Option 2 —
+DockerBashdocker build -t churn-prediction .
 docker run -p 8000:8000 churn-prediction
-API UsageSend a POST request to /predict:JSON{
+
+#API UsageSend a POST request to /predict:JSON{
   "tenure": 24,
   "MonthlyCharges": 65.50,
   "TotalCharges": 1572.00,
