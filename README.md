@@ -1,4 +1,4 @@
-Markdown# Churn Prediction — End-to-End ML Project
+# Churn Prediction — End-to-End ML Project
 
 A production-ready machine learning project that predicts customer churn using XGBoost, served via a FastAPI REST API, tracked with MLflow, and containerized with Docker.
 
@@ -79,4 +79,13 @@ ResponseJSON{
   "churn_probability": 0.6058,
   "risk_category": "medium risk of churn"
 }
-Key LearningsHandled class imbalance with scale_pos_weight instead of oversampling — cleaner and more efficientUsed stratified train/test split to maintain churn ratioPrevented data leakage by fitting scaler on train onlyTracked all experiments automatically with MLflowContainerized the full pipeline with Docker for reproducible, secure enterprise deploymentsBuilt production-ready REST API with FastAPI + Pydantic validation to block bad payloadsAuthorBuilt as an end-to-end ML engineer portfolio project.
+Key Learnings:
+>Handled class imbalance with scale_pos_weight instead of oversampling— cleaner and more efficient
+>Used stratified train/test split to maintain churn ratio
+>Prevented data leakage by fitting scaler on train only
+>Tracked all experiments automatically with MLflow
+>Containerized the full pipeline with Docker for reproducible, secure enterprise deployments
+>Built production-ready REST API with FastAPI + Pydantic validation to block bad payloads
+
+#Author
+:-Built as an end-to-end ML engineer portfolio project.
