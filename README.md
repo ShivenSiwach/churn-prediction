@@ -1,31 +1,27 @@
 # Churn Prediction — End-to-End ML Project
 
-A production-ready machine learning project that predicts customer churn 
-using XGBoost, served via a FastAPI REST API, tracked with MLflow, 
-and containerized with Docker.
+A production-ready machine learning project that predicts customer churn using XGBoost, served via a FastAPI REST API, tracked with MLflow, and containerized with Docker.
 
 ## Problem Statement
-A telecom company wants to identify customers likely to cancel their 
-subscription (churn) so they can intervene early and retain them.
+A telecom company wants to identify customers likely to cancel their subscription (churn) so they can intervene early and retain them.
 
 ## Dataset
-- Source: Kaggle Telco Customer Churn
-- Size: 7043 rows × 21 columns
-- Target: Churn (Yes/No) — 26.5% churn rate
+* **Source:** Kaggle Telco Customer Churn
+* **Size:** 7043 rows × 21 columns
+* **Target:** Churn (Yes/No) — 26.5% churn rate
 
 ## Tech Stack
 | Tool | Purpose |
-|------|---------|
-| XGBoost | Model training |
-| scikit-learn | Preprocessing + metrics |
-| pandas / numpy | Data manipulation |
-| FastAPI | REST API |
-| MLflow | Experiment tracking |
-| Docker | Containerization |
-| Python 3.11 | Core language |
+| :--- | :--- |
+| **XGBoost** | Model training and inference |
+| **scikit-learn** | Data preprocessing and evaluation metrics |
+| **pandas / numpy** | Data manipulation |
+| **FastAPI & Pydantic** | REST API routing and strict payload validation |
+| **MLflow** | Experiment tracking and artifact registry |
+| **Docker** | Secure, non-root containerization |
+| **Python 3.11** | Core language |
 
 ## Project Structure
-```
 churn-prediction/
 ├── data/               # Raw and processed data
 ├── src/                # Core scripts
@@ -38,54 +34,59 @@ churn-prediction/
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
-```
 
-## Model Performance
-| Metric | Score |
-|--------|-------|
-| AUC-ROC | 0.8252 |
-| F1 Score (churn) | 0.58 |
-| Precision | 0.53 |
-| Recall | 0.64 |
-| Accuracy | 0.75 |
+Model Performance
 
-> Model handles class imbalance using `scale_pos_weight=3.54`
+Metric             Score
+AUC-ROC            0.8252
+F1 Score (churn)   0.58
+Precision          0.53
+Recall             0.64
+Accuracy           0.75
+#Note: The model handles class imbalance natively using scale_pos_weight = 3.54.
 
-## ML Pipeline
-1. **Phase 1** — Data cleaning + EDA
-2. **Phase 2** — Feature engineering + train/test split
-3. **Phase 3** — XGBoost model training
-4. **Phase 4** — MLflow experiment tracking
-5. **Phase 5** — FastAPI deployment
-6. **Phase 6** — Docker containerization
+ML Pipeline:>
 
-## How to Run
+Phase 1: Data cleaning and Exploratory Data Analysis (EDA)
 
-### Option 1 — Local
-```bash
+Phase 2: Feature engineering and stratified train/test splitting
+
+Phase 3: XGBoost model training
+
+Phase 4: MLflow experiment tracking
+
+Phase 5: FastAPI deployment with Pydantic error handling
+
+Phase 6: Docker containerization with non-root security compliance
+
+How to Run
+
+Option 1 — Local Environment
 # Install dependencies
 pip install -r requirements.txt
 
-# Run preprocessing
+# Run preprocessing and train model
 python src/data_preprocessing.py
-
-# Train model
 python src/train_model.py
 
 # Start API
 uvicorn api.main:app --reload
-```
 
-### Option 2 — Docker
-```bash
+Option 2 — Docker (Recommended)
+
+Bash
+# Build the image
 docker build -t churn-prediction .
+
+# Run the container securely
 docker run -p 8000:8000 churn-prediction
-```
 
-## API Usage
-Send a POST request to `/predict`:
+API Usage
+Send a POST request to /predict. The API uses strict Pydantic data validation to reject improper data types and prevent backend crashes.
 
-```json
+Payload:
+
+JSON
 {
   "tenure": 24,
   "MonthlyCharges": 65.50,
@@ -112,28 +113,24 @@ Send a POST request to `/predict`:
   "PaymentMethod_Mailed_check": 0,
   "gender_Male": 1
 }
-```
+Response:
 
-### Response
-```json
+JSON
 {
   "churn_prediction": 1,
   "churn_probability": 0.6058,
-  "message": "medium risk of churn"
+  "risk_category": "medium risk of churn"
 }
-```
 
-## Key Learnings
+Key Learnings
+.Production API Hardening: Implemented strict Pydantic Field validation to reject bad payloads and optimized the endpoint to compute predictions natively from probabilities, cutting inference latency.
 
-- Handled class imbalance with `scale_pos_weight` instead of 
-  oversampling — cleaner and more efficient
-- Used stratified train/test split to maintain churn ratio
-- Prevented data leakage by fitting scaler on train only
-- Tracked all experiments automatically with MLflow
-- Containerized the full pipeline with Docker for 
-  reproducible deployments
-- Built production-ready REST API with FastAPI + Pydantic 
-  validation
+.Secure Deployment: Containerized the full pipeline with Docker, implementing a non-root user environment to align with enterprise security standards.
 
-## Author
-Built as an end-to-end ML engineer portfolio project.
+.Efficient Imbalance Handling: Handled class imbalance with scale_pos_weight instead of oversampling, ensuring cleaner and more efficient training.
+
+.Leakage Prevention: Prevented data leakage by strictly fitting the scaler on the training set only.
+
+.Observability: Tracked all experiments and artifact registries automatically with MLflow.
+
+:-Author: Built as a production-focused end-to-end ML engineering portfolio project.
