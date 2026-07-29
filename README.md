@@ -22,7 +22,7 @@ A telecom company wants to identify customers likely to cancel their subscriptio
 | **Python 3.11** | Core language |
 
 ## Project Structure
-```text
+
 churn-prediction/
 ├── data/               # Raw and processed data
 ├── src/                # Core scripts
