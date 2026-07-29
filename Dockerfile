@@ -1,5 +1,5 @@
 # Base image
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 # Create a non-root user for security compliance
 RUN adduser --disabled-password --gecos '' mluser

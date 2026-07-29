@@ -38,6 +38,8 @@ scale    = round(negative / positive, 2)
 params["scale_pos_weight"] = scale
 
 #  MLflow ─
+# Explicitly set the tracking URI to a local SQLite database in this directory
+mlflow.set_tracking_uri("sqlite:///mlflow.db")
 mlflow.set_experiment("churn-prediction")
 
 with mlflow.start_run(run_name="xgboost-baseline"):
