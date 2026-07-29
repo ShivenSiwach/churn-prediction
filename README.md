@@ -72,8 +72,9 @@ uvicorn api.main:app --reload
 DockerBashdocker build -t churn-prediction .
 docker run -p 8000:8000 churn-prediction
 
-```Text
+
 ## API UsageSend a POST request to /predict:JSON{
+ ```Text
   "tenure": 24,
   "MonthlyCharges": 65.50,
   "TotalCharges": 1572.00,
