@@ -59,13 +59,13 @@ Model handles class imbalance using scale_pos_weight=3.54
 :Option 1 — LocalBash# Install dependencies
 pip install -r requirements.txt
 
-# Run preprocessing
+ Run preprocessing
 python src/data_preprocessing.py
 
-# Train model
+ Train model
 python src/train_model.py
 
-# Start API
+ Start API
 uvicorn api.main:app --reload
 
 :Option 2 —
