@@ -21,8 +21,8 @@ A telecom company wants to identify customers likely to cancel their subscriptio
 | **Docker** | Containerization (secured with non-root user) |
 | **Python 3.11** | Core language |
 
-## Project Structure
-
+## Project Structure and Working Implementation
+```Text
 churn-prediction/
 ├── data/               # Raw and processed data
 ├── src/                # Core scripts
