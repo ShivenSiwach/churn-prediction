@@ -21,7 +21,7 @@ A telecom company wants to identify customers likely to cancel their subscriptio
 | **Docker** | Containerization (secured with non-root user) |
 | **Python 3.11** | Core language |
 
-## Project Structure and Working Implementation
+## Project Structure and ML phases
 ```Text
 churn-prediction/
 ├── data/               # Raw and processed data
@@ -35,7 +35,6 @@ churn-prediction/
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
-```
 
 Model Performance
 Metric                         Score
