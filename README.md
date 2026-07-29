@@ -36,6 +36,7 @@ churn-prediction/
 ├── requirements.txt
 └── README.md
 ```
+```
 Model Performance
 Metric                         Score
 AUC-ROC                        0.8252
