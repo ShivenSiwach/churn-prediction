@@ -73,7 +73,7 @@ uvicorn api.main:app --reload
 DockerBashdocker build -t churn-prediction .
 docker run -p 8000:8000 churn-prediction
 ```
-```
+```Text
 ## API UsageSend a POST request to /predict:JSON{
   "tenure": 24,
   "MonthlyCharges": 65.50,
@@ -106,7 +106,7 @@ ResponseJSON{
   "risk_category": "medium risk of churn"
 }
 ```
-```
+```Text
 ## Key Learnings:
 >Handled class imbalance with scale_pos_weight instead of oversampling— cleaner and more efficient
 >Used stratified train/test split to maintain churn ratio
