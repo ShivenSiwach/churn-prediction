@@ -35,7 +35,7 @@ churn-prediction/
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
-
+```
 Model Performance
 Metric                         Score
 AUC-ROC                        0.8252
