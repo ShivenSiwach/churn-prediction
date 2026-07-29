@@ -44,7 +44,7 @@ Precision                      0.53
 Recall                         0.64
 Accuracy                       0.75
 Model handles class imbalance using scale_pos_weight=3.54
-```
+
 
 ## ML Pipeline
 : Phase 1 — Data cleaning + EDA
@@ -53,7 +53,7 @@ Model handles class imbalance using scale_pos_weight=3.54
 : Phase 4 — MLflow experiment tracking
 : Phase 5 — FastAPI deployment (optimized for latency + Pydantic error handling)
 : Phase 6 — Docker containerization (enterprise-ready non-root deployment)
-
+```
 
 ## How to RunOption
 :Option 1 — LocalBash# Install dependencies
