@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("C:/Users/Dell/churn-prediction/data/telco_churn_cleaned.csv")
+df = pd.read_csv("data/telco_churn_cleaned.csv")
 print(df.shape)
 
 #binary yes/no column - 0/1
