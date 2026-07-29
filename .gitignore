@@ -9,3 +9,5 @@ models/
 # Data files
 data/
 *.csv
+*.db
+mlruns/
