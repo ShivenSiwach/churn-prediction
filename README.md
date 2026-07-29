@@ -75,7 +75,7 @@ docker run -p 8000:8000 churn-prediction
 
 ## API UsageSend a POST request to /predict:JSON{
  ```Text
-  "tenure": 24,
+ { "tenure": 24,
   "MonthlyCharges": 65.50,
   "TotalCharges": 1572.00,
   "avg_monthly_spend": 65.50,
