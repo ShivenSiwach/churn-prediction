@@ -105,7 +105,7 @@ ResponseJSON{
   "risk_category": "medium risk of churn"
 }
 ```
-
+```Text
 ## Key Learnings:
 >Handled class imbalance with scale_pos_weight instead of oversampling— cleaner and more efficient
 >Used stratified train/test split to maintain churn ratio
