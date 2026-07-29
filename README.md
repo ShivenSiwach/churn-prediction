@@ -45,7 +45,7 @@ Recall                         0.64
 Accuracy                       0.75
 Model handles class imbalance using scale_pos_weight=3.54
 
-#ML Pipeline
+##ML Pipeline
 : Phase 1 — Data cleaning + EDA
 : Phase2 — Feature engineering + train/test split
 : Phase 3 — XGBoost model training
@@ -53,7 +53,7 @@ Model handles class imbalance using scale_pos_weight=3.54
 : Phase 5 — FastAPI deployment (optimized for latency + Pydantic error handling)
 : Phase 6 — Docker containerization (enterprise-ready non-root deployment)
 
-#How to RunOption
+##How to RunOption
 :Option 1 — LocalBash# Install dependencies
 pip install -r requirements.txt
 
@@ -70,7 +70,7 @@ uvicorn api.main:app --reload
 DockerBashdocker build -t churn-prediction .
 docker run -p 8000:8000 churn-prediction
 
-#API UsageSend a POST request to /predict:JSON{
+##API UsageSend a POST request to /predict:JSON{
   "tenure": 24,
   "MonthlyCharges": 65.50,
   "TotalCharges": 1572.00,
@@ -101,7 +101,7 @@ ResponseJSON{
   "churn_probability": 0.6058,
   "risk_category": "medium risk of churn"
 }
-Key Learnings:
+##Key Learnings:
 >Handled class imbalance with scale_pos_weight instead of oversampling— cleaner and more efficient
 >Used stratified train/test split to maintain churn ratio
 >Prevented data leakage by fitting scaler on train only
@@ -109,5 +109,5 @@ Key Learnings:
 >Containerized the full pipeline with Docker for reproducible, secure enterprise deployments
 >Built production-ready REST API with FastAPI + Pydantic validation to block bad payloads
 
-#Author
+##Author
 :-Built as an end-to-end ML engineer portfolio project.
