@@ -4,4 +4,4 @@ xgboost==2.0.0
 numpy==1.26.4
 pandas==2.3.3
 scikit-learn==1.5.2
-mlflow==3.11.1
+mlflow==3.17.2
